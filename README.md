@@ -30,8 +30,8 @@ $ npm install
 4. Run the application, again using `npm`
 
 ```
-$ npm start
+$ npm npm run serve
 ```
 
 
-**This will open a new browser tab/window with the application running.**
+** Then visit your browser and type `localhost:5000` in the link field **
