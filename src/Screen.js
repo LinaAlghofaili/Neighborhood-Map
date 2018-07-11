@@ -30,19 +30,6 @@ class Screen extends React.Component {
         loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyA-u7kCxhvPC_YOG80jCkHjuCAD655fsjE&callback=initMap')
     }
 
-    /* 
-        loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyA-u7kCxhvPC_YOG80jCkHjuCAD655fsjE&callback=initMap', {
-        error: function() {console.log("Error! Can't load Google map");}
-    });
-    */
-
-    /*
-    loadjs.ready('https://maps.googleapis.com/maps/api/js?key=AIzaSyA-u7kCxhvPC_YOG80jCkHjuCAD655fsjE&callback=initMap', {
-    success: function() {},
-    error: function(depsNotFound) {console.log("Error! Can't load Google map");},
-    });
-    */
-
 
     // initialize map
 
@@ -198,16 +185,15 @@ class Screen extends React.Component {
 
 export default Screen;
 
-
-function loadError(oError) {
-    throw new URIError("The script " + oError.target.src + " didn't load correctly.");
-}
-
 function loadJS(src) {
     var ref = window.document.getElementsByTagName("script")[0];
     var script = window.document.createElement("script");
     script.src = src;
     script.async = true;
-    script.onerror = loadError;
     ref.parentNode.insertBefore(script, ref);
+    script.onerror = gm_authFailure();
+}
+
+function gm_authFailure() { 
+    alert("Error! Google map can't be loaded");
 }
