@@ -12,12 +12,12 @@ class Screen extends React.Component {
     constructor(props) {
         super(props);
         this.locations = [
-            { name: "Le dor", lat: 24.75326895, lng: 46.6119774 },
-            { name: "Molten", lat: 24.75312219, lng: 46.61025308 },
+            { name: "Circle", lat: 24.75011446, lng: 46.61350038 },
+            { name: "Sultan Steakhouse", lat: 24.75007548, lng: 46.61416557 },
             { name: "Madeleine", lat: 24.75097393, lng: 46.61296251 },
-            { name: "Sultan Steakhouse", lat: 24.75005319, lng: 46.61417487 },
+            { name: "Karak Gholam", lat: 24.75085982, lng: 46.61317315 },
             { name: "Cioccolat italiani", lat: 24.75123944, lng: 46.61291692 },
-            { name: "Signature", lat: 24.75332203, lng: 46.61014478 }
+            { name: "Tamra", lat: 24.75037265, lng: 46.61365595 }
         ]
 
         this.initMap = this.initMap.bind(this);
@@ -28,8 +28,20 @@ class Screen extends React.Component {
         this.setState({ locations: this.locations })
         window.initMap = this.initMap;
         loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyA-u7kCxhvPC_YOG80jCkHjuCAD655fsjE&callback=initMap')
-
     }
+
+    /* 
+        loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyA-u7kCxhvPC_YOG80jCkHjuCAD655fsjE&callback=initMap', {
+        error: function() {console.log("Error! Can't load Google map");}
+    });
+    */
+
+    /*
+    loadjs.ready('https://maps.googleapis.com/maps/api/js?key=AIzaSyA-u7kCxhvPC_YOG80jCkHjuCAD655fsjE&callback=initMap', {
+    success: function() {},
+    error: function(depsNotFound) {console.log("Error! Can't load Google map");},
+    });
+    */
 
 
     // initialize map
@@ -42,7 +54,8 @@ class Screen extends React.Component {
             center: { lat: 21.0075704, lng: 105.8029119 },
             mapTypeControlOptions: {
                 style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-                position: window.google.maps.ControlPosition.LEFT_BOTTOM
+                position: window.google.maps.ControlPosition.LEFT_BOTTOM,
+                zoom: 15,
             },
             mapTypeControl: true
         });
@@ -186,10 +199,15 @@ class Screen extends React.Component {
 export default Screen;
 
 
+function loadError(oError) {
+    throw new URIError("The script " + oError.target.src + " didn't load correctly.");
+}
+
 function loadJS(src) {
     var ref = window.document.getElementsByTagName("script")[0];
     var script = window.document.createElement("script");
     script.src = src;
     script.async = true;
+    script.onerror = loadError;
     ref.parentNode.insertBefore(script, ref);
 }
