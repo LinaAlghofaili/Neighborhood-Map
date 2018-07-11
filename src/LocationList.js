@@ -7,7 +7,7 @@ class LocationList extends React.Component {
         const { locations, selectFavourite } = this.props;
         console.log(locations)
         return (
-            <div id="favouriteId" className="favourite-item-container favourite-item-container-responsive">
+            <div role="button" tabIndex="0" id="favouriteId" className="favourite-item-container favourite-item-container-responsive">
                 {
                     locations.map((location) => (
                         <LocationRow key={location.name} selectFavourite={selectFavourite} location={location} />
